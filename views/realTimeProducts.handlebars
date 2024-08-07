@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Real Time Products</title>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const socket = io();
+
+      socket.on('products', (products) => {
+        const productContainer = document.getElementById('productList');
+        productContainer.innerHTML = '';
+        products.forEach(product => {
+          const li = document.createElement('li');
+          li.textContent = `${product.title} - ${product.description} - ${product.price}`;
+          productContainer.appendChild(li);
+        });
+      });
+    });
+  </script>
+</head>
+<body>
+  <h1>Lista de Productos en Tiempo Real</h1>
+  <ul id="productList">
+    <!-- Productos se actualizarán aquí -->
+  </ul>
+</body>
+</html>
